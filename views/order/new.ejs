@@ -1,0 +1,43 @@
+<% include ../partials/header %>
+
+<script src="/javaScript/order.js"></script>
+
+<div class="container-fluid">
+    <div class="container-fluid text-center" style="background: #e9ecef">
+        <h2 style="padding:15px">New Invoice</h2>
+    </div>    
+    <h4 style="text-align: center">
+        Particulars
+    </h4>
+    <hr>
+    <div style="width:75%; margin: auto auto;">
+        <form action="/order" method="POST">
+            <div id="particulars"></div>
+        
+            <div class="row">
+                <div class="col-1">
+                    <button type="button" class="btn btn-primary" id="add_item"><i class="fa fa-plus"></i></button>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-8">
+                    Total:
+                </div>
+                <div class="col-2">
+                    Rs. 
+                    <input style="width: 64px;border: none;" name="order[total]" id="total" readonly value="0" type="text">
+                </div>
+                <div class="col-2">
+                    <br>
+                    <br>
+                    <input type="hidden" value="<%= customer_id%>" name="customer_id" readonly>
+                    <input type="hidden" value="<%= customer_name%>" name="customer_name" readonly>
+                    <button class="btn btn-primary" style="width: 100%">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+    
+<% include ../partials/footer %>

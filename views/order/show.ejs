@@ -1,0 +1,45 @@
+<% include ../partials/header %>
+<div class="container">
+    <div class="card">
+  <div class="card-header">
+    Name: <%= customer.name %><br>
+    Mobile No: <%= customer.mobile_no %>
+  </div>
+  
+  <div class="card-body">
+    <table class="table table-hover table-bordered">
+  <thead class="thead-dark">
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Item</th>
+        <th scope="col">Rate</th>
+        <th scope="col">Weight</th>
+        <th scope="col">Price</th>
+    </tr>
+  </thead>
+  <tbody>
+        <% for(var i=0, length = order.price.length; i< order.price.length; i++){%>
+            <tr>
+                <th scope="row"><%= i+1 %></th>
+                <td><%= order.item[i] %></td>
+                <td><%= order.rate[i] %></td>
+                <td><%= order.weight[i] %></td>
+                <td><%= order.price[i] %></td>
+            </tr>
+        <% } %>
+        <tr class="table-secondary">
+            <th scope="row" colspan="4" class="">Total</th>
+            <td><%= order.total %></td>
+        </tr>
+  </tbody>
+</table>
+  </div>
+  
+  <div class="card-footer text-muted">
+    <%= order.date.toDateString(); %>
+  </div>
+</div>
+</div>
+
+
+<% include ../partials/footer %>
