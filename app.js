@@ -12,7 +12,9 @@ app.set("view engine", "ejs");
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 
-mongoose.connect("mongodb://localhost/ratnanjali", { useNewUrlParser: true });
+mongoose.connect(process.env.DBRATNANJALI, { useNewUrlParser: true });
+// mongoose.connect("mongodb://localhost/ratnanjali", { useNewUrlParser: true });
+
 
 app.use("/", indexRoutes);
 app.use("/customer", customerRoutes);
