@@ -4,13 +4,19 @@ var Order = require("../models/order");
 var Customer = require("../models/customer");
 
 router.get('/', function(req, res) {
-    Order.find({}, function(err, orders) {
+    Order.find({ isComplete: false }, function(err, openOrders) {
         if (err) {
             console.log(err);
         }
-        else {
-            res.render('order/index', { orders: orders });
-        }
+        Order.find({ isComplete: true }, function(err, completeOrders) {
+            if (err) {
+                console.log(err);
+            }
+            else {
+                res.render('order/index', { openOrders: openOrders, completeOrders: completeOrders });
+            }
+        });
+
     });
 });
 
@@ -43,6 +49,17 @@ router.get('/:id', function(req, res) {
             }
             res.render('order/show', { order: foundOrder, customer: foundCustomer });
         });
+    });
+});
+
+router.put('/:id', function(req, res) {
+    Order.findByIdAndUpdate(req.params.id, { isComplete: true }, function(err, updatedOrder) {
+        if (err) {
+            console.log(err)
+        }
+        else {
+            res.redirect('/order');
+        }
     });
 });
 

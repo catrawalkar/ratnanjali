@@ -1,26 +1,57 @@
 <% include ../partials/header %>
 <div class="container">
+    <h3>Open Orders</h3>
     <div class="row">
-        <% orders.forEach(function(order){ %>
+        <% openOrders.forEach(function(order){ %>
             <div class="col-lg-3 col-md-4 col-sm-6 ">
-                <div class="card" style="margin-bottom:2rem; background: #4ebace">
-                    <div class="card-header">
-                        <h5><%= order.customer.name%></h5>
-                        <p><%= order.date.toDateString() %></p>
+                <div class="card" style="margin-bottom:2rem;">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= order.customer.name%></h5>
+                        <h6 class="card-subtitle mb-2 text-muted"><%= order.date.toDateString() %></h6>
+                        <hr>
+                        <ul class="list-group list-group-flush" style="list-style: none;margin-left: 1rem">
+                            <li><%= order.item[0] %></li>
+                                <%if(order.item[1] && order.item[1].length>0){ %>
+                            <li><%= order.item[1]  %></li>
+                            <% } else{ %>
+                            <li>...</li>
+                            <% } %>
+                        </ul>
+                        <hr>
+                        <ul class="list-group list-group-flush">
+                            <li class="text-center" style="list-style: none;"><a class="btn btn-primary" href="/order/<%= order._id %>"><i class="fas fa-arrow-right"></i></a>
+                            <form class="delete-form" action="/order/<%= order._id %>?_method=PUT" method="POST">
+                                <button class="btn btn-success"><i class="fas fa-check" style="color: white"></i></button>
+                            </form></li>
+                        </ul>
                     </div>
-                    <ul class="list-group list-group-flush" style="list-style: none;margin-left: 1rem">
-                        <li><%= order.item.pop() %></li>
-                        <%  var item2 = order.item.pop();
-                            if(item2 && item2.length>0){ %>
-                        <li><%= item2  %></li>
-                        <% } else{ %>
-                        <li>...</li>
-                        <% } %>
-                    </ul>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item text-center"><a class="btn btn-primary btn-sm" href="/order/<%= order._id %>"><i class="fas fa-arrow-right"></i></a> 
-                        <a class="btn btn-success btn-sm" ><i class="fas fa-check" style="color: white"></i></a></li>
-                    </ul>
+                </div>
+            </div>
+        <% });%>
+    </div>
+    
+    <h3>Completed Orders</h3>
+    <div class="row">
+        <% completeOrders.forEach(function(order){ %>
+            <div class="col-lg-3 col-md-4 col-sm-6 ">
+                <div class="card bg-light" style="margin-bottom:2rem;">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= order.customer.name%></h5>
+                        <h6 class="card-subtitle mb-2 text-muted"><%= order.date.toDateString() %></h6>
+                        <hr>
+                        <ul class="list-group list-group-flush" style="list-style: none;margin-left: 1rem">
+                            <li><%= order.item[0] %></li>
+                                <%if(order.item[1] && order.item[1].length>0){ %>
+                            <li><%= order.item[1]  %></li>
+                            <% } else{ %>
+                            <li>...</li>
+                            <% } %>
+                        </ul>
+                        <hr>
+                        <ul class="list-group list-group-flush">
+                            <li class="text-center" style="list-style: none;"><a class="btn btn-primary" href="/order/<%= order._id %>"><i class="fas fa-arrow-right"></i></a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         <% });%>
