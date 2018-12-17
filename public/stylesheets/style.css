@@ -5,3 +5,8 @@ body {
 .delete-form {
     display: inline;
 }
+
+@page {
+    size: auto;
+    margin: 0mm;
+}

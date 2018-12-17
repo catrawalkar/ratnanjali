@@ -1,4 +1,12 @@
 <% include ../partials/header %>
+
+<script>
+    function confirmation(){
+        let confirmation = confirm("");
+        if (confirmation
+    }
+</script>
+
 <div class="container">
     <h3>Open Orders</h3>
     <div class="row">
@@ -49,7 +57,10 @@
                         </ul>
                         <hr>
                         <ul class="list-group list-group-flush">
-                            <li class="text-center" style="list-style: none;"><a class="btn btn-primary" href="/order/<%= order._id %>"><i class="fas fa-arrow-right"></i></a></li>
+                            <li class="text-center" style="list-style: none;"><a class="btn btn-primary" href="/order/<%= order._id %>"><i class="fas fa-arrow-right"></i></a>
+                            <form onSubmit="if(!confirm('Do you really wish to open this order again?')){return false;}" class="delete-form" action="/order/<%= order._id %>?_method=PUT" method="POST">
+                                <button class="btn btn-danger" style="width: 40px;"><i class="fas fa-exclamation" style="color: white"></i></button>
+                            </form></li>
                         </ul>
                     </div>
                 </div>

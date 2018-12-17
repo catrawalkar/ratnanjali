@@ -52,14 +52,31 @@ router.get('/:id', function(req, res) {
     });
 });
 
+// router.put('/:id', function(req, res) {
+//     Order.findByIdAndUpdate(req.params.id, { isComplete: true }, function(err, updatedOrder) {
+//         if (err) {
+//             console.log(err)
+//         }
+//         else {
+//             res.redirect('/order');
+//         }
+//     });
+// });
+
 router.put('/:id', function(req, res) {
-    Order.findByIdAndUpdate(req.params.id, { isComplete: true }, function(err, updatedOrder) {
+    Order.findById(req.params.id, { isComplete: true }, function(err, updatedOrder) {
         if (err) {
-            console.log(err)
+            console.log(err);
         }
-        else {
-            res.redirect('/order');
-        }
+        updatedOrder.isComplete = !updatedOrder.isComplete;
+        updatedOrder.save(function(err, updatedOrder) {
+            if (err) {
+                console.log(err);
+            }
+            else {
+                res.redirect('/order');
+            }
+        });
     });
 });
 
