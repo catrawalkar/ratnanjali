@@ -8,68 +8,67 @@
 </script>
 
 <div class="container">
-    <h3>Open Orders</h3>
-    <div class="row">
-        <% openOrders.forEach(function(order){ %>
-            <div class="col-lg-3 col-md-4 col-sm-6 ">
-                <div class="card" style="margin-bottom:2rem;">
-                    <div class="card-body">
-                        <h5 class="card-title"><%= order.customer.name%></h5>
-                        <h6 class="card-subtitle mb-2 text-muted"><%= order.date.toDateString() %></h6>
-                        <hr>
-                        <ul class="list-group list-group-flush" style="list-style: none;margin-left: 1rem">
-                            <li><%= order.item[0] %></li>
-                                <%if(order.item[1] && order.item[1].length>0){ %>
-                            <li><%= order.item[1]  %></li>
-                            <% } else{ %>
-                            <li>...</li>
-                            <% } %>
-                        </ul>
-                        <hr>
-                        <ul class="list-group list-group-flush">
-                            <li class="text-center" style="list-style: none;"><a class="btn btn-primary" href="/order/<%= order._id %>"><i class="fas fa-arrow-right"></i></a>
-                            <form class="delete-form" action="/order/<%= order._id %>?_method=PUT" method="POST">
-                                <button class="btn btn-success"><i class="fas fa-check" style="color: white"></i></button>
-                            </form></li>
-                        </ul>
+    <% if(openOrders.length){ %>
+        <h3>Open Orders</h3>
+        <div class="row">
+            <% openOrders.forEach(function(order){ %>
+                <div class="col-lg-3 col-md-4 col-sm-6 ">
+                    <div class="card" style="margin-bottom:2rem;">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= order.customer.name%></h5>
+                            <h6 class="card-subtitle mb-2 text-muted"><%= order.date.toDateString() %></h6>
+                            <hr>
+                            <ul class="list-group list-group-flush" style="list-style: none;margin-left: 1rem">
+                                <li><%= order.item[0] %></li>
+                                    <%if(order.item[1] && order.item[1].length>0){ %>
+                                <li><%= order.item[1]  %></li>
+                                <% } else{ %>
+                                <li>...</li>
+                                <% } %>
+                            </ul>
+                            <hr>
+                            <ul class="list-group list-group-flush">
+                                <li class="text-center" style="list-style: none;"><a class="btn btn-primary" href="/order/<%= order._id %>"><i class="fas fa-arrow-right"></i></a>
+                                <form class="delete-form" action="/order/<%= order._id %>?_method=PUT" method="POST">
+                                    <button class="btn btn-success"><i class="fas fa-check" style="color: white"></i></button>
+                                </form></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
-        <% });%>
-    </div>
-    
-    <h3>Completed Orders</h3>
-    <div class="row">
-        <% completeOrders.forEach(function(order){ %>
-            <div class="col-lg-3 col-md-4 col-sm-6 ">
-                <div class="card bg-light" style="margin-bottom:2rem;">
-                    <div class="card-body">
-                        <h5 class="card-title"><%= order.customer.name%></h5>
-                        <h6 class="card-subtitle mb-2 text-muted"><%= order.date.toDateString() %></h6>
-                        <hr>
-                        <ul class="list-group list-group-flush" style="list-style: none;margin-left: 1rem">
-                            <li><%= order.item[0] %></li>
-                                <%if(order.item[1] && order.item[1].length>0){ %>
-                            <li><%= order.item[1]  %></li>
-                            <% } else{ %>
-                            <li>...</li>
-                            <% } %>
-                        </ul>
-                        <hr>
-                        <ul class="list-group list-group-flush">
-                            <li class="text-center" style="list-style: none;"><a class="btn btn-primary" href="/order/<%= order._id %>"><i class="fas fa-arrow-right"></i></a>
-                            <form onSubmit="if(!confirm('Do you really wish to open this order again?')){return false;}" class="delete-form" action="/order/<%= order._id %>?_method=PUT" method="POST">
-                                <button class="btn btn-danger" style="width: 40px;"><i class="fas fa-exclamation" style="color: white"></i></button>
-                            </form></li>
-                        </ul>
+            <% });%>
+        </div>
+    <% }if(completeOrders.length){ %>
+        <h3>Completed Orders</h3>
+        <div class="row">
+            <% completeOrders.forEach(function(order){ %>
+                <div class="col-lg-3 col-md-4 col-sm-6 ">
+                    <div class="card bg-light" style="margin-bottom:2rem;">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= order.customer.name%></h5>
+                            <h6 class="card-subtitle mb-2 text-muted"><%= order.date.toDateString() %></h6>
+                            <hr>
+                            <ul class="list-group list-group-flush" style="list-style: none;margin-left: 1rem">
+                                <li><%= order.item[0] %></li>
+                                    <%if(order.item[1] && order.item[1].length>0){ %>
+                                <li><%= order.item[1]  %></li>
+                                <% } else{ %>
+                                <li>...</li>
+                                <% } %>
+                            </ul>
+                            <hr>
+                            <ul class="list-group list-group-flush">
+                                <li class="text-center" style="list-style: none;"><a class="btn btn-primary" href="/order/<%= order._id %>"><i class="fas fa-arrow-right"></i></a>
+                                <form onSubmit="if(!confirm('Do you really wish to open this order again?')){return false;}" class="delete-form" action="/order/<%= order._id %>?_method=PUT" method="POST">
+                                    <button class="btn btn-danger" style="width: 40px;"><i class="fas fa-exclamation" style="color: white"></i></button>
+                                </form></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
-        <% });%>
-    </div>
+            <% });%>
+        </div>
+    <% } %>
 </div>
-
-
-
 
 <% include ../partials/footer %>
