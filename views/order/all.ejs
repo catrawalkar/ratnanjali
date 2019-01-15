@@ -5,8 +5,8 @@
     } ); 
 </script>
 
-
-<table id="table_id" class="display">
+<div class="container">
+    <table id="table_id" class="display">
     <thead>
         <tr>
             <th>Date</th>
@@ -15,7 +15,7 @@
             <th>Rate</th>
             <th>Weight</th>
             <th>Price</th>
-            <th>IsComplete</th>
+            <th>Order Status</th>
             <th>Total</th>
         </tr>
     </thead>
@@ -28,11 +28,17 @@
             <td><%= order.rate %></td>
             <td><%= order.weight %></td>
             <td><%= order.price %></td>
-            <td><%= order.isComplete %></td>
+            <% if(order.isComplete == true){ %>
+            <td> Completed </td>
+            <% }
+            else {  %>
+            <td> Incomplete </td>
+            <% } %>
             <td><%= order.total %></td>
         </tr>
         <% }) %>
     </tbody>
 </table>
+</div>
 
 <% include ../partials/footer %>
