@@ -16,7 +16,15 @@ router.get('/', function(req, res) {
                 res.render('order/index', { openOrders: openOrders, completeOrders: completeOrders });
             }
         });
+    });
+});
 
+router.get('/all', function(req, res) {
+    Order.find({}, function(err, orders) {
+        if (err) {
+            console.log(err);
+        }
+        res.render('order/all', { orders: orders });
     });
 });
 
